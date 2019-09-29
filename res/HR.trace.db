@@ -1,0 +1,6 @@
+2019-09-28 20:31:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCT" not found; SQL statement:
+INSERT INTO PRODUCT VALUES (Test, Test, null) [42102-199]
+2019-09-28 20:36:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCT" not found; SQL statement:
+INSERT INTO PRODUCT VALUES (70.29131955290356Test, Test, null) [42102-199]
