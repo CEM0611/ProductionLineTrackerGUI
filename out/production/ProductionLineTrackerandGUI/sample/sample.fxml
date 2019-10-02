@@ -39,7 +39,7 @@
                                 <Label prefHeight="33.0" prefWidth="300.0" text="Product Name"/>
                                 <TextField fx:id="productName" prefHeight="12.0" prefWidth="123.0"
                                            GridPane.columnIndex="1"/>
-                                <TextField fx:id="Manufacturer" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                <TextField fx:id="manufacturer" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                                 <Label prefHeight="17.0" prefWidth="208.0" text="Manufacturer" GridPane.rowIndex="1"/>
                                 <Label prefHeight="17.0" prefWidth="118.0" text="Item Type" GridPane.rowIndex="2"/>
                                 <ChoiceBox fx:id="itemType" prefWidth="150.0" GridPane.columnIndex="1"
@@ -51,8 +51,8 @@
                         <TableView fx:id="existingProductTable" layoutX="5.0" layoutY="180.0" prefHeight="187.0"
                                    prefWidth="590.0">
                             <columns>
-                                <TableColumn fx:id="ManufacturerColumn" prefWidth="183.0" text="Manufacturer"/>
-                                <TableColumn fx:id="ProductsColumn" prefWidth="302.0" text="Product"/>
+                                <TableColumn fx:id="manufacturerColumn" prefWidth="183.0" text="Manufacturer"/>
+                                <TableColumn fx:id="productsColumn" prefWidth="302.0" text="Product"/>
                                 <TableColumn fx:id="itemTypeColumn" prefWidth="104.0" text="Item Type"/>
                             </columns>
                         </TableView>

@@ -1,10 +1,10 @@
 /**
- * Florida Gulf Coast University.
+ * This file contains the majority of the code used for database operation
+ * and storage as well as general program interaction.
+ * Florida Gulf Coast University
  * COP 3003 Object Oriented Programming Course
  *
  * @author Cristian Mendoza
- * This file contains the majority of the code used for database operation
- * and storage as well as general program interaction.
  */
 
 package sample;
@@ -12,7 +12,6 @@ package sample;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +24,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-
+/**
+ * This file contains the majority of the code used for database operation
+ * and storage as well as general program interaction.
+ * Florida Gulf Coast University
+ * COP 3003 Object Oriented Programming Course
+ *
+ * @author Cristian Mendoza
+ */
 public class Controller {
   // setting global variables for use within methods
   private Connection conn;
@@ -37,7 +43,7 @@ public class Controller {
   private TextField productName;
 
   @FXML
-  private TextField Manufacturer;
+  private TextField manufacturer;
 
   @FXML
   private ChoiceBox<String> itemType;
@@ -46,10 +52,10 @@ public class Controller {
   private TableView<?> existingProductTable;
 
   @FXML
-  private TableColumn<?, ?> ManufacturerColumn;
+  private TableColumn<?, ?> manufacturerColumn;
 
   @FXML
-  private TableColumn<?, ?> ProductsColumn;
+  private TableColumn<?, ?> productsColumn;
 
   @FXML
   private TableColumn<?, ?> itemTypeColumn;
@@ -60,12 +66,12 @@ public class Controller {
   @FXML
   private Button recP;
 
-  @FXML
-  /*
+  /**
    * initialize() method is used to preset the values for
    *  both the "Choose Quantity" combo-box in the
    *  Production tab and the "Item Type" choice-box in the Product Line tab.
    */
+  @FXML
   public void initialize() {
     ObservableList<String> itemTypeOptions =
         FXCollections.observableArrayList(
@@ -103,16 +109,20 @@ public class Controller {
   void addProduct(MouseEvent event) {
     try {
       initializeDB(); // Initializes database connection
-/*      PreparedStatement stmt;
+      /* PreparedStatement stmt;
       stmt = conn.createStatement();*/
-      String pName = productName.getText();
-      String mName = Manufacturer.getText();
-      String tName = itemType.getSelectionModel().getSelectedItem();
-      String sq1 = "INSERT INTO PRODUCT (NAME,TYPE,MANUFACTURER) " +
-          "VALUES ('" + mName + "', '" + pName + "', '" + tName + "')";
+      String productNameText = productName.getText();
+      String manufacturerText = manufacturer.getText();
+      String selectedItem = itemType.getSelectionModel().getSelectedItem();
+      String sq1 = "INSERT INTO PRODUCT (NAME,TYPE,MANUFACTURER) "
+          + "VALUES ('" + manufacturerText + "', '"
+              + productNameText + "', '" + selectedItem + "')";
       PreparedStatement preparedStatement1 = conn.prepareStatement(sq1);
-      int result = preparedStatement1.executeUpdate();
+      preparedStatement1.executeUpdate();
       preparedStatement1.close();
+      // Statement stmt = conn.createStatement();
+      // stmt.execute(String.format("SQL STATEMENT HERE WITH (%s string var pointers);", productName.getText(),etc.);
+      // stmt.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -130,14 +140,12 @@ public class Controller {
    */
   private void initializeDB() {
     // properties, Username and password needed to access database
-    final String JDBC_DRIVER = "org.h2.Driver";
-    final String DB_URL = "jdbc:h2:./res/H2";
-    final String USER = "";
-    final String PASS = "";
+    final String jdbcDriver = "org.h2.Driver";
+    final String dbUrl = "jdbc:h2:./res/H2";
     try {
       // connect to database
-      Class.forName(JDBC_DRIVER);
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      Class.forName(jdbcDriver);
+      conn = DriverManager.getConnection(dbUrl);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
