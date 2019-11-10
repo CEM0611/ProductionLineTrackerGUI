@@ -1,3 +1,12 @@
+/**
+ * This class was a temporary experiment which had been
+ * conducted successfully in order to test the functionality
+ * of the Product class with the database.
+ * Florida Gulf Coast University
+ * COP 3003 Object Oriented Programming Course
+ *
+ * @author Cristian Mendoza
+ */
 /*
 package sample;
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProductionLineTrackerandGUI.iml" filepath="$PROJECT_DIR$/ProductionLineTrackerandGUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProductionLineTrackerAndGUI.iml" filepath="$PROJECT_DIR$/ProductionLineTrackerAndGUI.iml" />
     </modules>
   </component>
 </project>
