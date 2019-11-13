@@ -9,6 +9,7 @@
 
 package com.github.CEM0611;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -17,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.Properties;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,6 +42,7 @@ import javafx.scene.input.MouseEvent;
  * @author Cristian Mendoza
  */
 public class Controller {
+  private static String PASS = "";
   private int accumulatedCount = 0;
   // setting global variables for use within methods
   private Connection conn;
@@ -266,8 +270,12 @@ public class Controller {
     final String dbUrl = "jdbc:h2:./res/hr";
     try {
       // connect to database
+      Properties prop = new Properties();
+      prop.load(new FileInputStream("res/properties"));
+      PASS = prop.getProperty("password");
       Class.forName(jdbcDriver);
-      conn = DriverManager.getConnection(dbUrl);
+      String user = "";
+      conn = DriverManager.getConnection(dbUrl,user,PASS);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
