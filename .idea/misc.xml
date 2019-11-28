@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller accumulatedCount" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller chooseProductList" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller conn" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller existingProductTable" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller itemType" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller itemTypeColumn" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.MonitorType LCD" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.MonitorType LED" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller logListView" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller manufacturer" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller manufacturerColumn" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller productName" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller productsColumn" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller recP" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller recQuantity" />
+      <entry_point TYPE="field" FQNAME="com.github.cem0611.Controller testBut" />
+    </entry_points>
+    <pattern value="com.github.cem0611.AudioPlayer" />
+    <pattern value="com.github.cem0611.AudioPlayer" method="AudioPlayer" />
+    <pattern value="com.github.cem0611.Controller" method="addProduct" />
+    <pattern value="com.github.cem0611.Controller" />
+    <pattern value="com.github.cem0611.MonitorType" method="getCode" />
+    <pattern value="com.github.cem0611.Item" method="getId" />
+    <pattern value="com.github.cem0611.Item" method="getManufacturer" />
+    <pattern value="com.github.cem0611.Product" method="getMediaType" />
+    <pattern value="com.github.cem0611.Item" method="getName" />
+    <pattern value="com.github.cem0611.ProductionRecord" method="getProductID" />
+    <pattern value="com.github.cem0611.ScreenSpec" method="getRefreshRate" />
+    <pattern value="com.github.cem0611.ScreenSpec" method="getResolution" />
+    <pattern value="com.github.cem0611.ScreenSpec" method="getResponseTime" />
+    <pattern value="com.github.cem0611.Main" />
+    <pattern value="com.github.cem0611.Controller" method="initialize" />
+    <pattern value="com.github.cem0611.Controller" method="initializeDB" />
+    <pattern value="com.github.cem0611.Item" />
+    <pattern value="com.github.cem0611.Main" method="main" />
+    <pattern value="com.github.cem0611.MonitorType" />
+    <pattern value="com.github.cem0611.MonitorType" method="MonitorType" />
+    <pattern value="com.github.cem0611.MoviePlayer" />
+    <pattern value="com.github.cem0611.MoviePlayer" method="MoviePlayer" />
+    <pattern value="com.github.cem0611.MultimediaControl" />
+    <pattern value="com.github.cem0611.MultimediaControl" method="next" />
+    <pattern value="com.github.cem0611.MultimediaControl" method="play" />
+    <pattern value="com.github.cem0611.MultimediaControl" method="previous" />
+    <pattern value="com.github.cem0611.Product" />
+    <pattern value="com.github.cem0611.Product" method="Product" />
+    <pattern value="com.github.cem0611.ProductionRecord" />
+    <pattern value="com.github.cem0611.Controller" method="recordProduct" />
+    <pattern value="com.github.cem0611.Controller" method="reverseString" />
+    <pattern value="com.github.cem0611.Screen" />
+    <pattern value="com.github.cem0611.Screen" method="Screen" />
+    <pattern value="com.github.cem0611.ScreenSpec" />
+    <pattern value="com.github.cem0611.Product" method="setId" />
+    <pattern value="com.github.cem0611.Item" method="setManufacturer" />
+    <pattern value="com.github.cem0611.Item" method="setName" />
+    <pattern value="com.github.cem0611.ProductionRecord" method="setProdDate" />
+    <pattern value="com.github.cem0611.ProductionRecord" method="setProductID" />
+    <pattern value="com.github.cem0611.ProductionRecord" method="setProductionNum" />
+    <pattern value="com.github.cem0611.ProductionRecord" method="setSerialNum" />
+    <pattern value="com.github.cem0611.Main" method="start" />
+    <pattern value="com.github.cem0611.MultimediaControl" method="stop" />
+    <pattern value="com.github.cem0611.Product" method="toString" />
+    <pattern value="com.github.cem0611.AudioPlayer" method="next" />
+    <pattern value="com.github.cem0611.AudioPlayer" method="play" />
+    <pattern value="com.github.cem0611.AudioPlayer" method="previous" />
+    <pattern value="com.github.cem0611.AudioPlayer" method="stop" />
+    <pattern value="com.github.cem0611.MoviePlayer" method="next" />
+    <pattern value="com.github.cem0611.MoviePlayer" method="play" />
+    <pattern value="com.github.cem0611.MoviePlayer" method="previous" />
+    <pattern value="com.github.cem0611.MoviePlayer" method="stop" />
+    <pattern value="com.github.cem0611.Product" method="getId" />
+    <pattern value="com.github.cem0611.Product" method="setManufacturer" />
+    <pattern value="com.github.cem0611.Product" method="setName" />
+  </component>
   <component name="ProjectKey">
     <option name="state" value="project://e79810c8-c5c8-43b1-b19c-90c1f4095425" />
   </component>

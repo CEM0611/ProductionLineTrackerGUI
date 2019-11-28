@@ -1,4 +1,5 @@
-package com.github.CEM0611;
+package com.github.cem0611;
+
 /**
  * This interface acts as a guide into which methods are implemented by whatever
  * class chooses to implement them.
@@ -8,14 +9,14 @@ package com.github.CEM0611;
  * @author Cristian Mendoza
  */
 
-public interface Item {
+interface Item {
   int getId();
 
   void setName(String name);
 
   String getName();
 
-  void setManufacturer(String Manufacturer);
+  void setManufacturer(String manufacturer);
 
   String getManufacturer();
 }

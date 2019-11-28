@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 /**
  * This enum performs a function very similar to the ItemType enum and
@@ -12,7 +12,7 @@ package com.github.CEM0611;
 
 public enum MonitorType {
   LCD("LCD"), LED("LED");
-  private String code;
+  private final String code;
 
   MonitorType(String code) {
     this.code = code;

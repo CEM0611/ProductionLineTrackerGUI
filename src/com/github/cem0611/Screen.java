@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 /**
  * This class was made to test future functionality of implementing
@@ -12,10 +12,17 @@ package com.github.CEM0611;
  */
 
 public class Screen extends Product implements ScreenSpec, Item {
-  private String resolution;
-  private int refreshRate;
-  private int responseTime;
+  private final String resolution;
+  private final int refreshRate;
+  private final int responseTime;
 
+  /**
+   * Constructor for Screen class.
+   *
+   * @param resolution   String
+   * @param refreshRate  int
+   * @param responseTime int
+   */
   public Screen(String resolution, int refreshRate, int responseTime) {
     this.resolution = resolution;
     this.refreshRate = refreshRate;
@@ -36,8 +43,8 @@ public class Screen extends Product implements ScreenSpec, Item {
 
   @Override
   public String toString() {
-    return "Resolution: " + getResolution() + "\n" +
-        "Refresh Rate: " + getRefreshRate() + "\n" +
-        "Response Time: " + getResponseTime();
+    return "Resolution: " + getResolution() + "\n"
+        + "Refresh Rate: " + getRefreshRate() + "\n"
+        + "Response Time: " + getResponseTime();
   }
 }

@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 /**
  * This interface holds the methods used by the movie player class
@@ -9,7 +9,7 @@ package com.github.CEM0611;
  * @author Cristian Mendoza
  */
 
-public interface MultimediaControl {
+interface MultimediaControl {
   void play();
 
   void stop();

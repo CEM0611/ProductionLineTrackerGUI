@@ -1,17 +1,16 @@
-/**
- * This file contains the majority of the code used for database operation
- * and storage as well as general program interaction.
- * Florida Gulf Coast University
- * COP 3003 Object Oriented Programming Course
- *
- * @author Cristian Mendoza
+/*
+  This file contains the majority of the code used for database operation
+  and storage as well as general program interaction.
+  Florida Gulf Coast University
+  COP 3003 Object Oriented Programming Course
+
+  @author Cristian Mendoza
  */
 
-package com.github.CEM0611;
+package com.github.cem0611;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,8 +40,8 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Cristian Mendoza
  */
+@SuppressWarnings("ALL")
 public class Controller {
-  private static String PASS = "";
   private int accumulatedCount = 0;
   // setting global variables for use within methods
   private Connection conn;
@@ -159,7 +158,8 @@ public class Controller {
         String serialNum = rs3.getString("SERIAL_NUM");
         String dateProducedFromDB = rs3.getString("DATE_PRODUCED");
         LocalDate dateProduced = LocalDate.parse(dateProducedFromDB);
-        ProductionRecord productionRecord = new ProductionRecord(productionNum, productId, serialNum, dateProduced);
+        ProductionRecord productionRecord = new ProductionRecord(productionNum,
+            productId, serialNum, dateProduced);
         productionRecords.add(productionRecord);
       }
       logListView.getItems().addAll(productionRecords);
@@ -188,9 +188,8 @@ public class Controller {
       ObservableList existingProduct = FXCollections.observableArrayList(product);
       existingProductTable.getItems().addAll(existingProduct);
 
-      String sq1 = "INSERT INTO PRODUCT (NAME,TYPE,MANUFACTURER) "
-          + "VALUES ('" + productNameText + "', '"
-          + selectedItem + "', '" + manufacturerText + "')";
+      String sq1 = String.format("INSERT INTO PRODUCT (NAME,TYPE,MANUFACTURER) "
+          + "VALUES ('%s', '%s', '%s')", productNameText, selectedItem, manufacturerText);
       PreparedStatement preparedStatement1 = conn.prepareStatement(sq1);
       preparedStatement1.executeUpdate();
       preparedStatement1.close();
@@ -205,9 +204,6 @@ public class Controller {
       }
       chooseProductList.setItems(recordedProduct);
       statement2.close();
-      // Statement stmt = conn.createStatement();
-      // stmt.execute(String.format("SQL STATEMENT HERE WITH (%s string var pointers);", productName.getText(),etc.);
-      // stmt.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -228,8 +224,7 @@ public class Controller {
     for (int i = 1; i <= selectedCount; i++) {
       try {
         String selectedItem = chooseProductList.getSelectionModel().getSelectedItem();
-        String sq = "SELECT * FROM PRODUCT WHERE NAME='"
-            + selectedItem + "'";
+        String sq = String.format("SELECT * FROM PRODUCT WHERE NAME='%s'", selectedItem);
         Statement statement = conn.createStatement();
         ResultSet rs = statement.executeQuery(sq);
         ObservableList<ProductionRecord> productionLine = FXCollections.observableArrayList();
@@ -241,16 +236,15 @@ public class Controller {
           ProductionRecord productionRecord = new ProductionRecord(product, accumulatedCount);
           accumulatedCount++;
           productionLine.add(productionRecord);
-          PreparedStatement ps = conn.prepareStatement("INSERT INTO PRODUCTIONRECORD VALUES('"
-              + productionRecord.getProductionNum()
-              + "', '"
-              + product.getName()
-              + "', '"
-              + productionRecord.getSerialNum()
-              + "', '"
-              + productionRecord.getProdDate()
-              + "')");
+          final String sq2 =
+              String.format("INSERT INTO PRODUCTIONRECORD VALUES('%d', '%s', '%s', '%s')",
+                  productionRecord.getProductionNum(),
+                  product.getName(),
+                  productionRecord.getSerialNum(),
+                  productionRecord.getProdDate().toString());
+          PreparedStatement ps = conn.prepareStatement(sq2);
           ps.executeUpdate();
+          ps.close();
         }
         logListView.getItems().addAll(productionLine);
         statement.close();
@@ -272,12 +266,25 @@ public class Controller {
       // connect to database
       Properties prop = new Properties();
       prop.load(new FileInputStream("res/properties"));
-      PASS = prop.getProperty("password");
+      String password = prop.getProperty("password");
       Class.forName(jdbcDriver);
       String user = "";
-      conn = DriverManager.getConnection(dbUrl,user,PASS);
+      conn = DriverManager.getConnection(dbUrl, user, reverseString(password));
     } catch (Exception ex) {
       ex.printStackTrace();
+    }
+  }
+
+  /**
+   * reverseString() is used to reverse String
+   * objects by taking a String parameter and reverse it
+   * through recursion.
+   */
+  private String reverseString(String str) {
+    if (str.isEmpty()) {
+      return str;
+    } else {
+      return reverseString(str.substring(1)) + str.charAt(0);
     }
   }
 }

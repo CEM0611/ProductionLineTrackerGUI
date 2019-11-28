@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 /**
  * This class was made to test future functionality of an embedded
@@ -10,32 +10,32 @@ package com.github.CEM0611;
  */
 
 public class MoviePlayer extends Product implements MultimediaControl {
-  private String resolution;
-  private int refreshRate;
-  private int responseTime;
-  private MonitorType monitorType;
+  private final String resolution;
+  private final int refreshRate;
+  private final int responseTime;
+  private final MonitorType monitorType;
   private String code;
 
-  MoviePlayer(String productName, String manufacturer, Screen aScreen, MonitorType monitorType) {
+  MoviePlayer(String productName, String manufacturer, Screen screen, MonitorType monitorType) {
     super(productName, manufacturer);
     this.code = "VISUAL";
-    this.resolution = aScreen.getResolution();
-    this.refreshRate = aScreen.getRefreshRate();
-    this.responseTime = aScreen.getResponseTime();
+    this.resolution = screen.getResolution();
+    this.refreshRate = screen.getRefreshRate();
+    this.responseTime = screen.getResponseTime();
     this.monitorType = monitorType;
     this.code = ItemType.VI.getMediaType();
   }
 
   @Override
   public String toString() {
-    return "Name: " + this.getName() + "\n" +
-        "Manufacturer: " + this.getManufacturer() + "\n" +
-        "Type: " + this.code + "\n" +
-        "Screen: " + "\n" +
-        "Resolution: " + this.resolution + "\n" +
-        "Refresh rate: " + this.refreshRate + "\n" +
-        "Response time: " + this.responseTime + "\n" +
-        "Monitor Type: " + this.monitorType;
+    return "Name: " + this.getName() + "\n"
+        + "Manufacturer: " + this.getManufacturer() + "\n"
+        + "Type: " + this.code + "\n"
+        + "Screen: " + "\n"
+        + "Resolution: " + this.resolution + "\n"
+        + "Refresh rate: " + this.refreshRate + "\n"
+        + "Response time: " + this.responseTime + "\n"
+        + "Monitor Type: " + this.monitorType;
   }
 
   public void play() {

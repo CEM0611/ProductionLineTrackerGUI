@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

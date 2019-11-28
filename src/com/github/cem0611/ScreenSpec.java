@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 /**
  * This interface holds the methods used by the Screen Class.
@@ -8,10 +8,10 @@ package com.github.CEM0611;
  * @author Cristian Mendoza
  */
 
-public interface ScreenSpec {
-  public String getResolution();
+interface ScreenSpec {
+  String getResolution();
 
-  public int getRefreshRate();
+  int getRefreshRate();
 
-  public int getResponseTime();
+  int getResponseTime();
 }
