@@ -22,6 +22,7 @@ import java.util.Properties;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -91,6 +92,8 @@ public class Controller {
    */
   @FXML
   public void initialize() {
+    productName.setPromptText("Example: Iphone 10+");
+    manufacturer.setPromptText("Example: Apple Inc.");
     initializeDB(); // Initializes database connection
     ObservableList<String> itemTypeOptions =
         FXCollections.observableArrayList(
@@ -177,35 +180,38 @@ public class Controller {
    */
   @FXML
   void addProduct(MouseEvent event) {
-    try {
-      /* PreparedStatement stmt;
-      stmt = conn.createStatement();*/
-      String productNameText = productName.getText();
-      String manufacturerText = manufacturer.getText();
-      String selectedItem = itemType.getSelectionModel().getSelectedItem();
+    if (!(productName.getText().equals("") || manufacturer.getText().equals(""))) {
+      try {
+        String productNameText = productName.getText();
+        String manufacturerText = manufacturer.getText();
+        String selectedItem = itemType.getSelectionModel().getSelectedItem();
 
-      Product product = new Product(productNameText, manufacturerText, selectedItem);
-      ObservableList existingProduct = FXCollections.observableArrayList(product);
-      existingProductTable.getItems().addAll(existingProduct);
+        Product product = new Product(productNameText, manufacturerText, selectedItem);
+        ObservableList existingProduct = FXCollections.observableArrayList(product);
+        existingProductTable.getItems().addAll(existingProduct);
 
-      String sq1 = String.format("INSERT INTO PRODUCT (NAME,TYPE,MANUFACTURER) "
-          + "VALUES ('%s', '%s', '%s')", productNameText, selectedItem, manufacturerText);
-      PreparedStatement preparedStatement1 = conn.prepareStatement(sq1);
-      preparedStatement1.executeUpdate();
-      preparedStatement1.close();
+        String sq1 = String.format("INSERT INTO PRODUCT (NAME,TYPE,MANUFACTURER) "
+            + "VALUES ('%s', '%s', '%s')", productNameText, selectedItem, manufacturerText);
+        PreparedStatement preparedStatement1 = conn.prepareStatement(sq1);
+        preparedStatement1.executeUpdate();
+        preparedStatement1.close();
 
-      String sq2 = "SELECT * FROM PRODUCT";
-      Statement statement2 = conn.createStatement();
-      ResultSet rs = statement2.executeQuery(sq2);
-      ObservableList<String> recordedProduct = FXCollections.observableArrayList();
-      while (rs.next()) {
-        String productName = rs.getString("NAME");
-        recordedProduct.add(productName);
+        String sq2 = "SELECT * FROM PRODUCT";
+        Statement statement2 = conn.createStatement();
+        ResultSet rs = statement2.executeQuery(sq2);
+        ObservableList<String> recordedProduct = FXCollections.observableArrayList();
+        while (rs.next()) {
+          String productName = rs.getString("NAME");
+          recordedProduct.add(productName);
+        }
+        chooseProductList.setItems(recordedProduct);
+        statement2.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
       }
-      chooseProductList.setItems(recordedProduct);
-      statement2.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
+    } else {
+      new Alert(Alert.AlertType.ERROR,
+          "Missing required information in one or more textfields!").showAndWait();
     }
 
   }
@@ -220,37 +226,51 @@ public class Controller {
    */
   @FXML
   void recordProduct(MouseEvent event) {
-    int selectedCount = Integer.parseInt(recQuantity.getSelectionModel().getSelectedItem());
-    for (int i = 1; i <= selectedCount; i++) {
-      try {
-        String selectedItem = chooseProductList.getSelectionModel().getSelectedItem();
-        String sq = String.format("SELECT * FROM PRODUCT WHERE NAME='%s'", selectedItem);
-        Statement statement = conn.createStatement();
-        ResultSet rs = statement.executeQuery(sq);
-        ObservableList<ProductionRecord> productionLine = FXCollections.observableArrayList();
-        while (rs.next()) {
-          String productName = rs.getString("NAME");
-          String manufacturer = rs.getString("MANUFACTURER");
-          String itemType = rs.getString("TYPE");
-          Product product = new Product(productName, manufacturer, itemType);
-          ProductionRecord productionRecord = new ProductionRecord(product, accumulatedCount);
-          accumulatedCount++;
-          productionLine.add(productionRecord);
-          final String sq2 =
-              String.format("INSERT INTO PRODUCTIONRECORD VALUES('%d', '%s', '%s', '%s')",
-                  productionRecord.getProductionNum(),
-                  product.getName(),
-                  productionRecord.getSerialNum(),
-                  productionRecord.getProdDate().toString());
-          PreparedStatement ps = conn.prepareStatement(sq2);
-          ps.executeUpdate();
-          ps.close();
+    if (!(chooseProductList.getSelectionModel().getSelectedItem() == (null))) {
+      String productName = null;
+      String manufacturer = null;
+      int selectedCount = Integer.parseInt(recQuantity.getSelectionModel().getSelectedItem());
+      for (int i = 1; i <= selectedCount; i++) {
+        try {
+          String selectedItem = chooseProductList.getSelectionModel().getSelectedItem();
+          String sq = String.format("SELECT * FROM PRODUCT WHERE NAME='%s'", selectedItem);
+          Statement statement = conn.createStatement();
+          ResultSet rs = statement.executeQuery(sq);
+          ObservableList<ProductionRecord> productionLine = FXCollections.observableArrayList();
+          while (rs.next()) {
+            productName = rs.getString("NAME");
+            manufacturer = rs.getString("MANUFACTURER");
+            String itemType = rs.getString("TYPE");
+            Product product = new Product(productName, manufacturer, itemType);
+            ProductionRecord productionRecord = new ProductionRecord(product, accumulatedCount);
+            accumulatedCount++;
+            productionLine.add(productionRecord);
+            final String sq2 =
+                String.format("INSERT INTO PRODUCTIONRECORD VALUES('%d', '%s', '%s', '%s')",
+                    productionRecord.getProductionNum(),
+                    product.getName(),
+                    productionRecord.getSerialNum(),
+                    productionRecord.getProdDate().toString());
+            PreparedStatement ps = conn.prepareStatement(sq2);
+            ps.executeUpdate();
+            ps.close();
+          }
+          logListView.getItems().addAll(productionLine);
+          statement.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
         }
-        logListView.getItems().addAll(productionLine);
-        statement.close();
-      } catch (SQLException e) {
-        e.printStackTrace();
       }
+      new Alert(Alert.AlertType.INFORMATION, selectedCount + " unit(s) of "
+          + productName + " manufactured by " + manufacturer
+          + " was/were recorded into production log successfully!").showAndWait();
+      System.out.println(selectedCount
+          + " product(s) recorded successfully into production log.");
+    } else {
+      new Alert(Alert.AlertType.ERROR,
+          "Please choose a product to record!").showAndWait();
+      System.out.println("No product was chosen to record nor"
+          + "any product was recorded.");
     }
   }
 
