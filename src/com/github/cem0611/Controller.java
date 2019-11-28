@@ -269,7 +269,7 @@ public class Controller {
     } else {
       new Alert(Alert.AlertType.ERROR,
           "Please choose a product to record!").showAndWait();
-      System.out.println("No product was chosen to record nor"
+      System.out.println("No product was chosen to record nor "
           + "any product was recorded.");
     }
   }
