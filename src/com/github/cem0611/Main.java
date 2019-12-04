@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +25,8 @@ public class Main extends Application {
     Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
     primaryStage.setTitle("Production Line Tracker GUI");
     primaryStage.setScene(new Scene(root, 600, 400));
+    primaryStage.getScene().getStylesheets().add(getClass().getResource(
+        "Stylesheet.css").toExternalForm());
     primaryStage.show();
   }
 

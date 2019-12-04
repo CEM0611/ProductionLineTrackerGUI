@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -17,12 +17,12 @@ import java.util.Date;
  * @author Cristian Mendoza
  */
 
-public class ProductionRecord extends Product {
+class ProductionRecord extends Product {
   private int productNum;
   private String productId;
   private String serialNum;
   private LocalDate date;
-  private String name;
+  private final String name;
 
   /**
    * Take newly added product and make a new production record from recording its production.
@@ -30,7 +30,9 @@ public class ProductionRecord extends Product {
   public ProductionRecord(Product product, int count) {
     this.productNum = 0;
     this.name = product.getName();
-    this.serialNum = product.getManufacturer().substring(0, 2).toUpperCase() + product.getType().toString() + String.format("%05d", count);
+    this.serialNum = product.getManufacturer().substring(0, 2).toUpperCase()
+        + product.getType().toString()
+        + String.format("%05d", count);
     Date dateUnconverted = new Date();
     this.date = dateUnconverted.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
   }
@@ -47,8 +49,8 @@ public class ProductionRecord extends Product {
 
   @Override
   public String toString() {
-    return "Prod. Num: " + this.productNum + " Product ID: " + this.name + " Serial Num: " +
-        this.serialNum + " Date: " + this.date;
+    return "Prod. Num: " + this.productNum + " Product ID: " + this.name + " Serial Num: "
+        + this.serialNum + " Date: " + this.date;
   }
 
   public void setProductionNum(int productNum) {

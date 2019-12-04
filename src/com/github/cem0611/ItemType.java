@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 /**
  * This enum is used for connecting ItemType codes and their full names to make easier
@@ -11,7 +11,7 @@ package com.github.CEM0611;
 
 public enum ItemType {
   AU("Audio"), VI("Visual"), AM("AudioMobile"), VM("VisualMobile");
-  private String mediaType;
+  private final String mediaType;
 
   ItemType(String mediaType) {
     this.mediaType = mediaType;

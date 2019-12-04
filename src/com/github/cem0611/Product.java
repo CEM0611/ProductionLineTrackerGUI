@@ -1,4 +1,4 @@
-package com.github.CEM0611;
+package com.github.cem0611;
 
 /**
  * Products in this class are assigned an ID, ItemType,
@@ -16,15 +16,28 @@ public class Product implements Item {
   private String name;
   private String mediaType;
 
-  public Product() {
+  Product() {
   }
 
-  public Product(String name, String manufacturer) {
+  /**
+   * Constructor for Product class.
+   *
+   * @param name         String
+   * @param manufacturer String
+   */
+  Product(String name, String manufacturer) {
     this.id = 0;
     this.name = name;
     this.manufacturer = manufacturer;
   }
 
+  /**
+   * Constructor for Product class.
+   *
+   * @param name         String
+   * @param manufacturer String
+   * @param type         ItemType
+   */
   public Product(String name, String manufacturer, ItemType type) {
     this.id = 0;
     this.name = name;
@@ -32,6 +45,13 @@ public class Product implements Item {
     this.type = type;
   }
 
+  /**
+   * Constructor for Product class.
+   *
+   * @param name         String
+   * @param manufacturer String
+   * @param mediaType    String
+   */
   public Product(String name, String manufacturer, String mediaType) {
     this.id = 0;
     this.name = name;
@@ -40,6 +60,14 @@ public class Product implements Item {
     setType(mediaType);
   }
 
+  /**
+   * Constructor for Product Class.
+   *
+   * @param id           int
+   * @param name         String
+   * @param manufacturer String
+   * @param type         ItemType
+   */
   public Product(int id, String name, String manufacturer, ItemType type) {
     this.id = id;
     this.name = name;
@@ -63,11 +91,11 @@ public class Product implements Item {
     return this.name;
   }
 
-  public void setManufacturer(String Manufacturer) {
-    this.manufacturer = Manufacturer;
+  public void setManufacturer(String manufacturer) {
+    this.manufacturer = manufacturer;
   }
 
-  public ItemType getType() {
+  ItemType getType() {
     return type;
   }
 
@@ -76,16 +104,23 @@ public class Product implements Item {
    * is unique to the others as it takes a mediaType String parameter
    * and converts it through an if-else statement chain.
    */
-  public void setType(String mediaType) {
+  private void setType(String mediaType) {
     // If mediaType holds the same String value as "Audio"
-    if (mediaType.equals("Audio")) {
-      this.type = ItemType.AU;
-    } else if (mediaType.equals("AudioMobile")) {
-      this.type = ItemType.AM;
-    } else if (mediaType.equals("Visual")) {
-      this.type = ItemType.VI;
-    } else if (mediaType.equals("VisualMobile")) {
-      this.type = ItemType.VM;
+    switch (mediaType) {
+      case "Audio":
+        this.type = ItemType.AU;
+        break;
+      case "AudioMobile":
+        this.type = ItemType.AM;
+        break;
+      case "Visual":
+        this.type = ItemType.VI;
+        break;
+      case "VisualMobile":
+        this.type = ItemType.VM;
+        break;
+      default:
+        System.out.println("Something went wrong with the enum!");
     }
   }
 
@@ -101,11 +136,18 @@ public class Product implements Item {
     this.name = name;
   }
 
+  /**
+   * Overridden toString() method for printing out Product class.
+   *
+   * @param name         String
+   * @param manufacturer String
+   * @param type         String
+   */
   public void toString(String name, String manufacturer, String type) {
-    System.out.println("Name: " + name + "\n" +
-        "\n" +
-        "Manufacturer: " + manufacturer + "\n" +
-        "\n" +
-        "Type: " + type);
+    System.out.println("Name: " + name + "\n"
+        + "\n"
+        + "Manufacturer: " + manufacturer + "\n"
+        + "\n"
+        + "Type: " + type);
   }
 }
